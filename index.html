@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <title>Road to the Majors</title>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <header id="topBar">
+
+```
+<div id="gameLogo">
+  ROAD TO THE MAJORS
+</div>
+
+<div id="topStatus">
+  <span id="topTeam">팀 없음</span>
+  <span id="topLevel">Lv.1</span>
+  <span id="topSalary">$0</span>
+</div>
+```
+
+  </header>
+
+  <!-- =========================
+       HOME
+  ========================== -->
+
+  <main id="app">
+
+```
+<section id="homeScreen" class="screen active">
+
+  <div class="homeHero">
+
+    <div class="heroText">
+
+      <div class="smallTitle">
+        ORIGINAL BASEBALL CAREER MODE
+      </div>
+
+      <h1>
+        ROAD TO<br>
+        THE MAJORS
+      </h1>
+
+      <p>
+        마이너리그에서 시작해<br>
+        메이저리그까지 올라가라.
+      </p>
+
+    </div>
+
+    <div class="homeButtons">
+
+      <button
+        id="newCareerButton"
+        class="mainButton">
+        새 커리어
+      </button>
+
+      <button
+        id="continueButton"
+        class="subButton">
+        이어하기
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="homeInfo">
+
+    <div class="infoCard">
+      <strong>⚾ 직접 플레이</strong>
+      <span>타격 · 주루 · 수비 · 투구</span>
+    </div>
+
+    <div class="infoCard">
+      <strong>📡 ABS</strong>
+      <span>경기당 기본 판독 2회</span>
+    </div>
+
+    <div class="infoCard">
+      <strong>🏆 MLB</strong>
+      <span>마이너에서 메이저까지</span>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     CREATE PLAYER
+========================== -->
+
+<section
+  id="createScreen"
+  class="screen">
+
+  <div class="panel createPanel">
+
+    <div class="sectionTitle">
+      <span>PLAYER CREATION</span>
+      <h2>선수 만들기</h2>
+    </div>
+
+
+    <div class="playerForm">
+
+      <label>
+        이름
+        <input
+          id="playerNameInput"
+          type="text"
+          maxlength="18"
+          value="Rookie">
+      </label>
+
+
+      <label>
+        등번호
+        <input
+          id="playerNumberInput"
+          type="number"
+          min="0"
+          max="99"
+          value="7">
+      </label>
+
+
+      <label>
+        포지션
+
+        <select id="playerPositionInput">
+
+          <option value="C">C</option>
+          <option value="1B">1B</option>
+          <option value="2B">2B</option>
+          <option value="3B">3B</option>
+          <option value="SS">SS</option>
+          <option value="LF">LF</option>
+          <option value="CF" selected>CF</option>
+          <option value="RF">RF</option>
+          <option value="DH">DH</option>
+
+        </select>
+
+      </label>
+
+
+      <label>
+        타격
+
+        <select id="batHandInput">
+
+          <option value="R" selected>우타</option>
+          <option value="L">좌타</option>
+
+        </select>
+
+      </label>
+
+
+      <label>
+        투구
+
+        <select id="throwHandInput">
+
+          <option value="R" selected>우투</option>
+          <option value="L">좌투</option>
+
+        </select>
+
+      </label>
+
+    </div>
+
+
+    <div class="tokenHeader">
+
+      <div>
+        <span>STARTING TOKENS</span>
+        <strong id="startingTokenDisplay">
+          250
+        </strong>
+      </div>
+
+      <p>
+        1토큰 = 능력치 +1
+      </p>
+
+    </div>
+
+
+    <div id="statAllocator">
+
+      <!-- JavaScript가 생성 -->
+
+    </div>
+
+
+    <div class="createBottom">
+
+      <div>
+        남은 토큰
+        <strong id="remainingTokenDisplay">
+          250
+        </strong>
+      </div>
+
+      <button
+        id="createPlayerButton"
+        class="mainButton">
+        커리어 시작
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     CAREER
+========================== -->
+
+<section
+  id="careerScreen"
+  class="screen">
+
+  <div class="careerHeader panel">
+
+    <div>
+
+      <div id="careerStageText">
+        ROOKIE
+      </div>
+
+      <h2 id="careerPlayerName">
+        Rookie
+      </h2>
+
+      <p id="careerTeamText">
+        팀 없음
+      </p>
+
+    </div>
+
+
+    <div class="overallBox">
+
+      <span>OVR</span>
+
+      <strong id="overallValue">
+        0
+      </strong>
+
+    </div>
+
+  </div>
+
+
+  <!-- NAVIGATION -->
+
+  <nav id="careerNavigation">
+
+    <button
+      class="careerTab active"
+      data-page="dashboardPage">
+      커리어
+    </button>
+
+    <button
+      class="careerTab"
+      data-page="equipmentPage">
+      장비
+    </button>
+
+    <button
+      class="careerTab"
+      data-page="trainingPage">
+      훈련
+    </button>
+
+    <button
+      class="careerTab"
+      data-page="seasonPage">
+      시즌
+    </button>
+
+    <button
+      class="careerTab"
+      data-page="savePage">
+      저장
+    </button>
+
+  </nav>
+
+
+  <!-- =========================
+       DASHBOARD
+  ========================== -->
+
+  <div
+    id="dashboardPage"
+    class="careerPage active">
+
+    <div class="dashboardGrid">
+
+
+      <div class="panel">
+
+        <div class="panelTitle">
+          능력치
+        </div>
+
+        <div id="playerStats">
+
+          <!-- JavaScript 생성 -->
+
+        </div>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div class="panelTitle">
+          커리어 정보
+        </div>
+
+        <div id="careerInformation">
+
+          <!-- JavaScript 생성 -->
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="panel nextGamePanel">
+
+      <div class="panelTitle">
+        NEXT GAME
+      </div>
+
+      <div id="nextGameInformation">
+
+        <!-- JavaScript 생성 -->
+
+      </div>
+
+      <button
+        id="startGameButton"
+        class="mainButton">
+        경기 시작
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       EQUIPMENT
+  ========================== -->
+
+  <div
+    id="equipmentPage"
+    class="careerPage">
+
+    <div class="panel">
+
+      <div class="panelTitle">
+        장비
+      </div>
+
+      <p class="description">
+        연봉을 사용해 장비를 뽑을 수 있습니다.
+      </p>
+
+      <div id="equipmentList">
+
+        <!-- JavaScript 생성 -->
+
+      </div>
+
+
+      <div class="salaryDraw">
+
+        <div>
+
+          <span>
+            현재 연봉
+          </span>
+
+          <strong id="equipmentSalary">
+            $0
+          </strong>
+
+        </div>
+
+
+        <button
+          id="equipmentDrawButton"
+          class="mainButton">
+          장비 뽑기
+        </button>
+
+      </div>
+
+
+      <div id="equipmentResult"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       TRAINING
+  ========================== -->
+
+  <div
+    id="trainingPage"
+    class="careerPage">
+
+    <div class="panel">
+
+      <div class="panelTitle">
+        훈련
+      </div>
+
+      <p class="description">
+        훈련 성공 시 토큰을 1개 얻습니다.
+      </p>
+
+      <button
+        id="trainingButton"
+        class="mainButton">
+        훈련 시작
+      </button>
+
+      <div id="trainingResult"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       SEASON
+  ========================== -->
+
+  <div
+    id="seasonPage"
+    class="careerPage">
+
+    <div class="panel">
+
+      <div class="panelTitle">
+        시즌
+      </div>
+
+      <div id="seasonStatistics">
+
+        <!-- JavaScript 생성 -->
+
+      </div>
+
+      <button
+        id="salaryNegotiationButton"
+        class="mainButton">
+        시즌 종료 · 연봉협상
+      </button>
+
+
+      <div id="contractOffers">
+
+        <!-- JavaScript 생성 -->
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       SAVE
+  ========================== -->
+
+  <div
+    id="savePage"
+    class="careerPage">
+
+    <div class="panel">
+
+      <div class="panelTitle">
+        저장
+      </div>
+
+      <p class="description">
+        총 3개의 저장 슬롯을 사용할 수 있습니다.
+      </p>
+
+
+      <div class="saveSlotGrid">
+
+        <div class="saveSlot">
+
+          <strong>슬롯 1</strong>
+
+          <button data-save-slot="0">
+            저장
+          </button>
+
+          <button data-load-slot="0">
+            불러오기
+          </button>
+
+        </div>
+
+
+        <div class="saveSlot">
+
+          <strong>슬롯 2</strong>
+
+          <button data-save-slot="1">
+            저장
+          </button>
+
+          <button data-load-slot="1">
+            불러오기
+          </button>
+
+        </div>
+
+
+        <div class="saveSlot">
+
+          <strong>슬롯 3</strong>
+
+          <button data-save-slot="2">
+            저장
+          </button>
+
+          <button data-load-slot="2">
+            불러오기
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div id="saveMessage"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     GAME SCREEN
+========================== -->
+
+<section
+  id="gameScreen"
+  class="screen">
+
+
+  <div class="gameHeader">
+
+    <button
+      id="returnCareerButton">
+      ← 커리어
+    </button>
+
+
+    <div id="gameSituation">
+      경기 준비
+    </div>
+
+
+    <div id="absDisplay">
+      ABS 2/2
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       BATTING
+  ========================== -->
+
+  <div
+    id="battingMode"
+    class="playMode">
+
+    <canvas
+      id="battingCanvas"
+      width="900"
+      height="560">
+    </canvas>
+
+
+    <div class="gameHelp">
+      존을 직접 조준하고 공이 들어오는 순간 스윙하세요.
+    </div>
+
+
+    <div class="mobileControls">
+
+      <div
+        id="battingJoystick"
+        class="joystick">
+
+        <div class="joystickStick"></div>
+
+      </div>
+
+
+      <button
+        id="swingButton"
+        class="bigActionButton">
+        SWING
+      </button>
+
+
+      <button
+        id="absButton"
+        class="absButton">
+        ABS
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       RUNNING
+  ========================== -->
+
+  <div
+    id="runningMode"
+    class="playMode hidden">
+
+    <canvas
+      id="runningCanvas"
+      width="900"
+      height="560">
+    </canvas>
+
+
+    <div class="gameHelp">
+      조이스틱으로 주자를 직접 움직입니다.
+    </div>
+
+
+    <div class="mobileControls">
+
+      <div
+        id="runningJoystick"
+        class="joystick">
+
+        <div class="joystickStick"></div>
+
+      </div>
+
+
+      <button
+        id="runActionButton"
+        class="bigActionButton">
+        RUN
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       FIELDING
+  ========================== -->
+
+  <div
+    id="fieldingMode"
+    class="playMode hidden">
+
+    <canvas
+      id="fieldingCanvas"
+      width="900"
+      height="560">
+    </canvas>
+
+
+    <div class="gameHelp">
+      조이스틱으로 수비수를 직접 이동하고 송구 방향을 직접 조준합니다.
+    </div>
+
+
+    <div class="mobileControls">
+
+      <div
+        id="fieldingJoystick"
+        class="joystick">
+
+        <div class="joystickStick"></div>
+
+      </div>
+
+
+      <button
+        id="throwButton"
+        class="bigActionButton">
+        THROW
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       PITCHING
+  ========================== -->
+
+  <div
+    id="pitchingMode"
+    class="playMode hidden">
+
+    <canvas
+      id="pitchingCanvas"
+      width="900"
+      height="560">
+    </canvas>
+
+
+    <div
+      id="pitchTypeButtons"
+      class="pitchButtons">
+
+      <button data-pitch="FASTBALL">
+        직구
+      </button>
+
+      <button data-pitch="SLIDER">
+        슬라이더
+      </button>
+
+      <button data-pitch="CHANGEUP">
+        체인지업
+      </button>
+
+      <button data-pitch="CURVE">
+        커브
+      </button>
+
+    </div>
+
+
+    <button
+      id="pitchButton"
+      class="bigActionButton">
+      PITCH
+    </button>
+
+  </div>
+
+
+  <div id="gameMessage"></div>
+
+</section>
+```
+
+  </main>
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+
+  <script src="js/data.js"></script>
+
+  <script src="js/app.js"></script>
+
+</body>
+</html>
